@@ -5,9 +5,406 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="ASM2435 方舟：生存飞升 PVE 服务器 — 公平、纯净、生存冒险" />
   <title>ASM2435 方舟：生存飞升 服务器</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 线性风格linear风配色与布局 */
+    body {
+      background: linear-gradient(120deg, #151a27 0%, #222a41 70%, #253e4c 100%);
+      color: #e7eaf0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    .site-header {
+      background: linear-gradient(90deg, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.10) 100%);
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 4px 24px 0 rgba(6,182,212,0.03);
+    }
+    .brand .logo {
+      background: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 26px;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing:2px;
+      text-transform: uppercase;
+    }
+    .brand .subtitle {
+      color: #a0aec0;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+    .nav a, .nav button {
+      background: none;
+      border: none;
+      color: #b5c6e0;
+      font-weight: bold;
+      padding: 0 20px;
+      line-height: 40px;
+      border-radius: 20px;
+      transition: background 0.18s, color 0.18s;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .nav .btn-ghost {
+      background: linear-gradient(90deg, #7c3aed26 0%, #06b6d426 100%);
+      color: #fff;
+      border: 1px solid #5e5edc32;
+    }
+    .nav a:hover, .nav .btn-ghost:hover, .nav button:hover {
+      background: linear-gradient(90deg, #7c3aed20 0%, #06b6d420 100%);
+      color: #fff;
+    }
+    main {
+      width: 100%;
+    }
+
+    /* Hero区linear风格化 */
+    .hero {
+      padding: 70px 0 48px 0;
+      background: linear-gradient(110deg, #242e45 0 70%, transparent 100%);
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-left {
+      flex: 1.4;
+      min-width: 240px;
+    }
+    .hero-right {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .hero-left h1 {
+      font-size: 2.7rem;
+      letter-spacing: 4px;
+      background: linear-gradient(90deg, #7c3aed 40%, #06b6d4 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .hero-left .lead {
+      font-size: 1.14rem;
+      color: #c3dafe;
+      margin-bottom: 30px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #7c3aed 10%, #06b6d4 90%);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 36px;
+      font-size: 1.04rem;
+      font-weight: 600;
+      box-shadow: 0 5px 20px 0 #06b6d440;
+      transition: filter 0.16s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.12);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #06b6d4;
+      color: #86eafd;
+      border-radius: 20px;
+      padding: 12px 32px;
+      font-size: 1.04rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.16s, color 0.16s;
+    }
+    .btn-outline:hover {
+      background: linear-gradient(90deg, #7c3aed20 0%, #06b6d410 100%);
+      color: #fff;
+    }
+    .quick-info {
+      margin-top: 18px;
+      background: linear-gradient(90deg,#232146 0%,#118c9580 100%);
+      padding: 18px 22px;
+      border-radius: 18px;
+      color: #f8fafc;
+      font-size: 1rem;
+      box-shadow: 0 2px 16px 0 #06b6d410;
+      list-style:none;
+    }
+    .quick-info li + li {
+      margin-top: 7px;
+    }
+
+    /* 服务器信息卡 */
+    .server-card-hero {
+      background: linear-gradient(120deg, #251a4d 22%, #193f53 120%);
+      border-radius: 22px;
+      box-shadow: 0 6px 30px 2px #06b6d422;
+      overflow: hidden;
+      padding: 0;
+      min-width: 260px;
+    }
+    .server-card-hero .card-body {
+      padding: 30px 20px;
+      color: #e2e8f0;
+    }
+    .server-card-hero h3 {
+      font-size: 1.2rem;
+      margin-bottom: 13px;
+      background: linear-gradient(90deg, #7c3aedaa 30%, #06b6d4aa 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 600;
+    }
+    .server-card-hero .mono {
+      font-family: 'Menlo', 'Consolas', monospace;
+      color: #c2d0fa;
+      margin-bottom: 13px;
+    }
+    .server-stats {
+      font-size: 1rem;
+      color: #9be5fd;
+      margin-bottom: 17px;
+    }
+    .server-stats > div {
+      margin-bottom: 3px;
+    }
+    .server-card-hero .btn-ghost {
+      display: inline-block;
+      background: linear-gradient(90deg,#7c3aed16 0%,#06b6d416 100%);
+      color: #86eafd;
+      border: 1.5px solid #06b6d4bb;
+      border-radius: 16px;
+      padding: 7px 25px;
+      transition: background 0.15s, color 0.15s;
+      text-decoration:none;
+      font-size: 1rem;
+    }
+    .server-card-hero .btn-ghost:hover {
+      background: linear-gradient(90deg, #7c3aed50 0%, #06b6d450 100%);
+      color: #fff;
+    }
+
+    /* 特性块linear风格 */
+    .features-grid {
+      display: flex;
+      gap: 32px;
+      margin-top: 36px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+    .feature {
+      flex: 1 1 200px;
+      background: linear-gradient(120deg, #181f3d 80%, #1a474d 100%);
+      border-radius: 18px;
+      padding: 32px 18px;
+      box-shadow: 0 5px 16px 0 #7c3aed25;
+      color: #e5e9fa;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.16s;
+    }
+    .feature:hover {
+      box-shadow: 0 12px 32px 0 #06b6d444;
+    }
+    .feature .icon {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 12px;
+      color: #7c3aed;
+    }
+    .feature h3 {
+      margin: 7px 0 6px 0;
+      font-size: 1.12rem;
+      background: linear-gradient(90deg,#7c3aed 20%,#06b6d4 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+    .feature p {
+      color: #b1b8d6;
+      font-size: 1rem;
+    }
+
+    /* 服务器列表linear卡片 */
+    .servers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    .server-card {
+      background: linear-gradient(110deg,#151d32 70%,#02658218 100%);
+      border-radius: 14px;
+      box-shadow: 0 4px 20px 0 #7c3aed16;
+      display: flex;
+      overflow: hidden;
+      min-width: 230px;
+      flex: 1 1 260px;
+      transition: box-shadow 0.15s;
+      border: 1.5px solid #5e5edc16;
+    }
+    .server-card:hover {
+      box-shadow: 0 12px 36px 0 #06b6d450;
+    }
+    .thumb {
+      width: 80px;
+      background: linear-gradient(120deg,#7c3aed 40%,#06b6d4 130%);
+      display: block;
+    }
+    .thumb.ragnarok {background: linear-gradient(120deg, #7c3aed 30%, #18bccf 100%);}
+    .thumb.island {background: linear-gradient(120deg, #06b6d4 50%, #7c3aed80 100%);}
+    .thumb.scorched {background: linear-gradient(120deg,#fbbf24 40%, #7c3aed 100%);}
+    .thumb.aberration {background: linear-gradient(120deg,#a78bfa 30%, #06b6d4 120%);}
+    .card-info {
+      padding: 16px 20px;
+      color: #e1eaff;
+    }
+    .card-info h3 {
+      margin: 0 0 5px 0;
+      background: linear-gradient(90deg,#7c3aed 30%,#06b6d4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+      font-size: 1.08rem;
+    }
+    .card-info p {
+      color: #c2d6ea;
+      font-size: 0.98rem;
+    }
+
+    /* section通用linear背景和圆角 */
+    .section,
+    .section.alt {
+      background: linear-gradient(100deg,#191e2f 85%, #14343a22 100%);
+      border-radius: 18px;
+      margin-bottom: 32px;
+      padding: 56px 0 30px 0;
+      box-shadow: 0 2px 15px 0 #06b6d410;
+    }
+    .section h2 {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg,#7c3aed 10%,#06b6d4 60%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+    .muted {
+      color: #7dd3fc;
+      opacity: 0.78;
+    }
+
+    .rules-list {
+      list-style: disc inside;
+      color: #f1f1ff;
+      font-size: 1rem;
+      margin-bottom: 22px;
+    }
+
+    .faq {
+      background: linear-gradient(90deg, #181e35 60%, #2dd4bf0d 120%);
+      border-radius: 14px;
+      padding: 23px 18px;
+      color: #ffeefd;
+      margin-top: 16px;
+      box-shadow: 0 3px 18px 0 #06b6d40c;
+    }
+    .faq h3 {
+      font-weight: 600;
+      margin-bottom: 7px;
+      background: linear-gradient(90deg,#7c3aed 30%,#06b6d4 110%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 1.04rem;
+    }
+    details {
+      margin-bottom: 7px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    details p {
+      color: #a7bcfd;
+      margin-left: 18px;
+      margin-top: 3px;
+      font-size: 0.98rem;
+    }
+    .cta-section {
+      background: linear-gradient(90deg,#262150 80%, #06b6d420 115%);
+      border-radius: 20px;
+      box-shadow: 0 2px 33px 0 #7c3aed30;
+      padding: 48px 0;
+      margin-top: 44px;
+      margin-bottom: 48px;
+    }
+    .cta-box {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .cta-box h2 {
+      font-size: 1.32rem;
+      background: linear-gradient(90deg, #7c3aed 25%, #06b6d4 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .cta-box .mono {
+      font-family: 'Menlo', monospace;
+      color: #05cdef;
+      background: none;
+      letter-spacing: 1px;
+      margin-top: 13px;
+    }
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 200px;
+    }
+    .site-footer {
+      background: linear-gradient(90deg, #181e37 10%, #06b6d425 90%);
+      color: #a3aac4;
+      padding: 28px 0 18px 0;
+      font-size: 0.99rem;
+      border-radius: 14px 14px 0 0;
+      margin-top: 60px;
+      box-shadow: 0 -2px 16px 0 #7c3aed0c;
+      text-align: center;
+    }
+    @media (max-width: 840px) {
+      .hero-grid { flex-direction: column; gap: 28px; }
+      .servers-grid, .features-grid, .cta-box { flex-direction: column; }
+      .server-card, .feature { min-width: unset; }
+      .cta-section { padding: 34px 0; }
+      .container { padding: 16px; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -16,7 +413,6 @@
         <div class="logo">ASM2435</div>
         <div class="subtitle">方舟：生存飞升 • PVE 纯净服</div>
       </div>
-
       <nav class="nav" aria-label="主导航">
         <a href="#intro">介绍</a>
         <a href="#servers">服务器</a>
@@ -27,7 +423,6 @@
       </nav>
     </div>
   </header>
-
   <main>
     <section id="hero" class="hero">
       <div class="container hero-grid">
@@ -38,14 +433,12 @@
             <a href="#join" class="btn-primary">加入我们</a>
             <a href="#servers" class="btn-outline">查看服务器</a>
           </div>
-
           <ul class="quick-info">
             <li><strong>类型：</strong>PVE / 纯净生存</li>
             <li><strong>采集倍率：</strong>x3　<strong>驯服：</strong>x5　<strong>孵化/成长：</strong>x10</li>
             <li><strong>新手友好：</strong>资源平衡，社区和谐</li>
           </ul>
         </div>
-
         <div class="hero-right">
           <div class="card server-card-hero">
             <div class="card-body">
@@ -61,25 +454,21 @@
         </div>
       </div>
     </section>
-
     <section id="intro" class="section">
       <div class="container">
         <h2>服务器简介</h2>
         <p class="muted">ASM2435 致力于打造公平、稳定、长久运营的方舟 PVE 环境，让玩家专注于生存与探险。</p>
-
         <div class="features-grid">
           <div class="feature">
             <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 .5-4.5 4 1 6L12 17l-5.5 2.5 1-6L3 8.5 9 8 12 2z" fill="currentColor"/></svg>
             <h3>纯净游戏</h3>
             <p>无商店、无 MOD、无后台管理干预，保留原汁原味生存乐趣。</p>
           </div>
-
           <div class="feature">
             <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M1 12h22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
             <h3>合理倍率</h3>
             <p>根据平衡性设置采集/驯服/孵化等倍率，既高效又不过度加速。</p>
           </div>
-
           <div class="feature">
             <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z" fill="currentColor"/></svg>
             <h3>社区与福利</h3>
@@ -88,7 +477,6 @@
         </div>
       </div>
     </section>
-
     <section id="servers" class="section alt">
       <div class="container">
         <h2>当前服务器列表</h2>
@@ -100,7 +488,6 @@
               <p>史诗级大陆，多样生态与探险点，适合团队与单人探险。</p>
             </div>
           </article>
-
           <article class="server-card">
             <div class="thumb island"></div>
             <div class="card-info">
@@ -108,7 +495,6 @@
               <p>经典起点，原始生存体验，适合新手与怀旧玩家。</p>
             </div>
           </article>
-
           <article class="server-card">
             <div class="thumb scorched"></div>
             <div class="card-info">
@@ -116,7 +502,6 @@
               <p>极端环境挑战，资源稀缺，考验玩家适应力与策略。</p>
             </div>
           </article>
-
           <article class="server-card">
             <div class="thumb aberration"></div>
             <div class="card-info">
@@ -127,7 +512,6 @@
         </div>
       </div>
     </section>
-
     <section id="rules" class="section">
       <div class="container">
         <h2>规则与福利</h2>
@@ -137,14 +521,12 @@
           <li>新手友好：提供基础指导与社区答疑。</li>
           <li>在线满 100 小时可向管理员申请游戏管理密码或额外福利（视情况审批）。</li>
         </ul>
-
         <div class="faq">
           <h3>常见问题</h3>
           <details>
             <summary>如何加入服务器？</summary>
             <p>在方舟客户端内搜索服务器名称或直接使用服务器 IP 与端口进行连接。</p>
           </details>
-
           <details>
             <summary>是否有 Discord/社区？</summary>
             <p>服务器通常会维护一个社区频道以便交流。若需邀请可联系管理员。</p>
@@ -152,7 +534,6 @@
         </div>
       </div>
     </section>
-
     <section id="join" class="section cta-section">
       <div class="container cta-box">
         <div>
@@ -160,7 +541,6 @@
           <p class="muted">复制以下连接信息并在客户端中添加。欲了解更多请通过下方联系方式咨询。</p>
           <p class="mono"><strong>示例：</strong> Asia_2435_Server_仙境 • IP: your.server.ip • Port: 7777</p>
         </div>
-
         <div class="cta-actions">
           <a class="btn-primary" href="#">复制服务器地址</a>
           <a class="btn-outline" href="#">联系我们</a>
@@ -168,14 +548,12 @@
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
     <div class="container">
       <div>© 2025 ASM2435 • 保留所有权利</div>
       <div class="muted">页面由 ASM2435 运营团队维护</div>
     </div>
   </footer>
-
   <script>
     // 主题切换与移动菜单
     const themeBtn = document.getElementById('themeToggle');

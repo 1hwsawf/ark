@@ -1,58 +1,72 @@
-// 主题切换与滚动效果
+// Linear风格主题切换与滚动效果
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const themeToggle = document.getElementById('theme-toggle');
     const hero = document.getElementById('hero');
 
-    // 平滑滚动
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
+    // linear风格平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
             e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
     });
 
-    // 导航高亮
+    // linear风格导航高亮
     window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section');
+        const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-list a');
-        let current = '';
+        let activeId = '';
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 200) {
-                current = section.getAttribute('id');
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 120 && rect.bottom > 120) {
+                activeId = section.id;
             }
         });
         navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            if (link.getAttribute('href') === `#${activeId}`) {
                 link.classList.add('active');
+                // linear风格高亮
+                link.style.background = 'linear-gradient(90deg, #7c3aed26 0%, #06b6d426 100%)';
+                link.style.color = '#fff';
+            } else {
+                link.classList.remove('active');
+                link.style.background = '';
+                link.style.color = '';
             }
         });
 
-        // Hero渐变半透明
-        if (scrollY > 100) {
-            hero.classList.add('scrolled');
+        // linear风格Hero渐变
+        if (scrollY > 80) {
+            hero && hero.classList.add('scrolled');
         } else {
-            hero.classList.remove('scrolled');
+            hero && hero.classList.remove('scrolled');
         }
     });
 
-    // 主题切换
+    // linear风格主题切换：深浅色 + 渐变切换
     themeToggle.addEventListener('click', () => {
-        body.classList.toggle('light-theme');
-        themeToggle.textContent = body.classList.contains('light-theme') ? '☀️' : '🌙';
-        localStorage.setItem('theme', body.classList.contains('light-theme') ? 'light' : 'dark');
+        if (body.classList.contains('linear-light')) {
+            body.classList.remove('linear-light');
+            themeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.add('linear-light');
+            themeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
     });
 
-    // 加载时恢复主题
+    // linear风格加载时恢复主题
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
-        body.classList.add('light-theme');
+        body.classList.add('linear-light');
         themeToggle.textContent = '☀️';
+    } else {
+        body.classList.remove('linear-light');
+        themeToggle.textContent = '🌙';
     }
 });
