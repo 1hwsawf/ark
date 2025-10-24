@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="ASM2435 方舟：生存飞升 PVE 服务器 — 公平、纯净、生存冒险" />
-  <title>ASM2435 方舟：生存飞升 服务器</title>
+  <meta name="description" content="无有乡 方舟：生存飞升 PVE 服务器 — 公平、纯净、生存冒险" />
+  <title>无有乡 方舟：生存飞升 服务器</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
@@ -268,10 +268,13 @@
       background: linear-gradient(120deg,#7c3aed 40%,#06b6d4 130%);
       display: block;
     }
-    .thumb.ragnarok {background: linear-gradient(120deg, #7c3aed 30%, #18bccf 100%);}
+    .thumb.aberration {background: linear-gradient(120deg, #a78bfa 30%, #06b6d4 120%);}
+    .thumb.valguero {background: linear-gradient(120deg, #06b6d4 50%, #7c3aed80 100%);}
+    .thumb.extinction {background: linear-gradient(120deg, #7c3aed 30%, #18bccf 100%);}
     .thumb.island {background: linear-gradient(120deg, #06b6d4 50%, #7c3aed80 100%);}
-    .thumb.scorched {background: linear-gradient(120deg,#fbbf24 40%, #7c3aed 100%);}
-    .thumb.aberration {background: linear-gradient(120deg,#a78bfa 30%, #06b6d4 120%);}
+    .thumb.genesis2 {background: linear-gradient(120deg, #fbbf24 40%, #7c3aed 100%);}
+    .thumb.ragnarok {background: linear-gradient(120deg, #7c3aed 30%, #18bccf 100%);}
+    .thumb.center {background: linear-gradient(120deg, #a78bfa 30%, #06b6d4 120%);}
     .card-info {
       padding: 16px 20px;
       color: #e1eaff;
@@ -397,6 +400,22 @@
       box-shadow: 0 -2px 16px 0 #7c3aed0c;
       text-align: center;
     }
+    .copy-btn {
+      display: inline-block;
+      background: linear-gradient(90deg,#7c3aed16 0%,#06b6d416 100%);
+      color: #86eafd;
+      border: 1.5px solid #06b6d4bb;
+      border-radius: 16px;
+      padding: 7px 25px;
+      transition: background 0.15s, color 0.15s;
+      text-decoration:none;
+      font-size: 0.9rem;
+      margin-left: 10px;
+    }
+    .copy-btn:hover {
+      background: linear-gradient(90deg, #7c3aed50 0%, #06b6d450 100%);
+      color: #fff;
+    }
     @media (max-width: 840px) {
       .hero-grid { flex-direction: column; gap: 28px; }
       .servers-grid, .features-grid, .cta-box { flex-direction: column; }
@@ -410,7 +429,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <div class="logo">ASM2435</div>
+        <div class="logo">无有乡</div>
         <div class="subtitle">方舟：生存飞升 • PVE 纯净服</div>
       </div>
       <nav class="nav" aria-label="主导航">
@@ -427,7 +446,7 @@
     <section id="hero" class="hero">
       <div class="container hero-grid">
         <div class="hero-left">
-          <h1>欢迎来到 ASM2435</h1>
+          <h1>欢迎来到 无有乡</h1>
           <p class="lead">公平 · 纯净 · 探索 — 无商店、无 MOD、无管理干预的真实 PVE 生存体验。</p>
           <div class="hero-ctas">
             <a href="#join" class="btn-primary">加入我们</a>
@@ -443,12 +462,12 @@
           <div class="card server-card-hero">
             <div class="card-body">
               <h3>服务器连线信息</h3>
-              <p class="mono">Asia_2435_Server_仙境 / 端口: 7777</p>
+              <p class="mono">『无有乡』017X - 纯净仙境 • IP: 183.155.32.240:8110</p>
               <div class="server-stats">
                 <div><strong>在线:</strong> 12-120 人</div>
-                <div><strong>地图:</strong> Ragnarok / Island / Extinction 等</div>
+                <div><strong>地图:</strong> 仙境 / 孤岛 / 灭绝 等</div>
               </div>
-              <a href="#join" class="btn-ghost">复制连线信息</a>
+              <a href="#" class="btn-ghost" onclick="copyToClipboard('open 183.155.32.240:8110')">复制连线信息</a>
             </div>
           </div>
         </div>
@@ -457,7 +476,7 @@
     <section id="intro" class="section">
       <div class="container">
         <h2>服务器简介</h2>
-        <p class="muted">ASM2435 致力于打造公平、稳定、长久运营的方舟 PVE 环境，让玩家专注于生存与探险。</p>
+        <p class="muted">无有乡 致力于打造公平、稳定、长久运营的方舟 PVE 环境，让玩家专注于生存与探险。</p>
         <div class="features-grid">
           <div class="feature">
             <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 .5-4.5 4 1 6L12 17l-5.5 2.5 1-6L3 8.5 9 8 12 2z" fill="currentColor"/></svg>
@@ -482,31 +501,52 @@
         <h2>当前服务器列表</h2>
         <div class="servers-grid">
           <article class="server-card">
-            <div class="thumb ragnarok"></div>
+            <div class="thumb aberration"></div>
             <div class="card-info">
-              <h3>Asia_2435_Server_仙境（Ragnarok）</h3>
-              <p>史诗级大陆，多样生态与探险点，适合团队与单人探险。</p>
+              <h3>『无有乡』010X - 纯净畸变 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8010')">直连复制</a></h3>
+              <p>地下奇观，独特生态与危机四伏的探险乐趣。</p>
+            </div>
+          </article>
+          <article class="server-card">
+            <div class="thumb valguero"></div>
+            <div class="card-info">
+              <h3>『无有乡』019X - 纯净瓦尔 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8130')">直连复制</a></h3>
+              <p>多样地形，适合团队探险与资源收集。</p>
+            </div>
+          </article>
+          <article class="server-card">
+            <div class="thumb extinction"></div>
+            <div class="card-info">
+              <h3>『无有乡』013X - 纯净灭绝 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8050')">直连复制</a></h3>
+              <p>末世废土，挑战极限生存与科技发展。</p>
             </div>
           </article>
           <article class="server-card">
             <div class="thumb island"></div>
             <div class="card-info">
-              <h3>Asia_2435_Server_孤岛（The Island）</h3>
+              <h3>『无有乡』003X - 纯净孤岛 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:7780')">直连复制</a></h3>
               <p>经典起点，原始生存体验，适合新手与怀旧玩家。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb scorched"></div>
+            <div class="thumb genesis2"></div>
             <div class="card-info">
-              <h3>Asia_2435_Server_焦土（Scorched Earth）</h3>
-              <p>极端环境挑战，资源稀缺，考验玩家适应力与策略。</p>
+              <h3>『无有乡』014X - 纯净繁星 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8070')">直连复制</a></h3>
+              <p>星际探险，独特生态与高科技挑战。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb aberration"></div>
+            <div class="thumb ragnarok"></div>
             <div class="card-info">
-              <h3>Asia_2435_Server_畸变（Aberration）</h3>
-              <p>地下奇观，独特生态与危机四伏的探险乐趣。</p>
+              <h3>『无有乡』017X - 纯净仙境 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8110')">直连复制</a></h3>
+              <p>史诗级大陆，多样生态与探险点，适合团队与单人探险。</p>
+            </div>
+          </article>
+          <article class="server-card">
+            <div class="thumb center"></div>
+            <div class="card-info">
+              <h3>『无有乡』007X - 纯净中心 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:7850')">直连复制</a></h3>
+              <p>火山与丛林交织，适合资源收集与团队合作。</p>
             </div>
           </article>
         </div>
@@ -539,10 +579,10 @@
         <div>
           <h2>准备好加入了吗？</h2>
           <p class="muted">复制以下连接信息并在客户端中添加。欲了解更多请通过下方联系方式咨询。</p>
-          <p class="mono"><strong>示例：</strong> Asia_2435_Server_仙境 • IP: your.server.ip • Port: 7777</p>
+          <p class="mono"><strong>示例：</strong> 『无有乡』017X - 纯净仙境 • IP: 183.155.32.240:8110</p>
         </div>
         <div class="cta-actions">
-          <a class="btn-primary" href="#">复制服务器地址</a>
+          <a class="btn-primary" href="#" onclick="copyToClipboard('open 183.155.32.240:8110')">复制服务器地址</a>
           <a class="btn-outline" href="#">联系我们</a>
         </div>
       </div>
@@ -550,8 +590,8 @@
   </main>
   <footer class="site-footer">
     <div class="container">
-      <div>© 2025 ASM2435 • 保留所有权利</div>
-      <div class="muted">页面由 ASM2435 运营团队维护</div>
+      <div>© 2025 无有乡 • 保留所有权利</div>
+      <div class="muted">页面由 无有乡 运营团队维护</div>
     </div>
   </footer>
   <script>
@@ -590,6 +630,15 @@
         }
       });
     });
+
+    // 复制到剪贴板
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('已复制到剪贴板: ' + text);
+      }).catch(err => {
+        console.error('复制失败: ', err);
+      });
+    }
   </script>
 </body>
 </html>
