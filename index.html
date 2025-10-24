@@ -244,8 +244,8 @@
 
     /* 服务器列表linear卡片 */
     .servers-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr; /* 一行一个服务器 */
       gap: 24px;
       margin-top: 20px;
     }
@@ -253,44 +253,44 @@
       background: linear-gradient(110deg,#151d32 70%,#02658218 100%);
       border-radius: 14px;
       box-shadow: 0 4px 20px 0 #7c3aed16;
-      display: flex;
       overflow: hidden;
       min-width: 230px;
-      flex: 1 1 260px;
       transition: box-shadow 0.15s;
       border: 1.5px solid #5e5edc16;
     }
     .server-card:hover {
       box-shadow: 0 12px 36px 0 #06b6d450;
     }
-    .thumb {
-      width: 80px;
-      background: linear-gradient(120deg,#7c3aed 40%,#06b6d4 130%);
-      display: block;
-    }
-    .thumb.aberration {background: linear-gradient(120deg, #a78bfa 30%, #06b6d4 120%);}
-    .thumb.valguero {background: linear-gradient(120deg, #06b6d4 50%, #7c3aed80 100%);}
-    .thumb.extinction {background: linear-gradient(120deg, #7c3aed 30%, #18bccf 100%);}
-    .thumb.island {background: linear-gradient(120deg, #06b6d4 50%, #7c3aed80 100%);}
-    .thumb.genesis2 {background: linear-gradient(120deg, #fbbf24 40%, #7c3aed 100%);}
-    .thumb.ragnarok {background: linear-gradient(120deg, #7c3aed 30%, #18bccf 100%);}
-    .thumb.center {background: linear-gradient(120deg, #a78bfa 30%, #06b6d4 120%);}
     .card-info {
       padding: 16px 20px;
       color: #e1eaff;
     }
     .card-info h3 {
-      margin: 0 0 5px 0;
+      margin: 0;
       background: linear-gradient(90deg,#7c3aed 30%,#06b6d4 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       font-weight: bold;
       font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .card-info p {
-      color: #c2d6ea;
-      font-size: 0.98rem;
+    .copy-btn {
+      display: inline-block;
+      background: linear-gradient(90deg,#7c3aed16 0%,#06b6d416 100%);
+      color: #86eafd;
+      border: 1.5px solid #06b6d4bb;
+      border-radius: 16px;
+      padding: 7px 25px;
+      transition: background 0.15s, color 0.15s;
+      text-decoration:none;
+      font-size: 0.9rem;
+    }
+    .copy-btn:hover {
+      background: linear-gradient(90deg, #7c3aed50 0%, #06b6d450 100%);
+      color: #fff;
     }
 
     /* section通用linear背景和圆角 */
@@ -400,22 +400,6 @@
       box-shadow: 0 -2px 16px 0 #7c3aed0c;
       text-align: center;
     }
-    .copy-btn {
-      display: inline-block;
-      background: linear-gradient(90deg,#7c3aed16 0%,#06b6d416 100%);
-      color: #86eafd;
-      border: 1.5px solid #06b6d4bb;
-      border-radius: 16px;
-      padding: 7px 25px;
-      transition: background 0.15s, color 0.15s;
-      text-decoration:none;
-      font-size: 0.9rem;
-      margin-left: 10px;
-    }
-    .copy-btn:hover {
-      background: linear-gradient(90deg, #7c3aed50 0%, #06b6d450 100%);
-      color: #fff;
-    }
     @media (max-width: 840px) {
       .hero-grid { flex-direction: column; gap: 28px; }
       .servers-grid, .features-grid, .cta-box { flex-direction: column; }
@@ -501,52 +485,38 @@
         <h2>当前服务器列表</h2>
         <div class="servers-grid">
           <article class="server-card">
-            <div class="thumb aberration"></div>
             <div class="card-info">
               <h3>『无有乡』010X - 纯净畸变 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8010')">直连复制</a></h3>
-              <p>地下奇观，独特生态与危机四伏的探险乐趣。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb valguero"></div>
             <div class="card-info">
               <h3>『无有乡』019X - 纯净瓦尔 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8130')">直连复制</a></h3>
-              <p>多样地形，适合团队探险与资源收集。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb extinction"></div>
             <div class="card-info">
               <h3>『无有乡』013X - 纯净灭绝 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8050')">直连复制</a></h3>
-              <p>末世废土，挑战极限生存与科技发展。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb island"></div>
             <div class="card-info">
               <h3>『无有乡』003X - 纯净孤岛 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:7780')">直连复制</a></h3>
-              <p>经典起点，原始生存体验，适合新手与怀旧玩家。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb genesis2"></div>
             <div class="card-info">
               <h3>『无有乡』014X - 纯净繁星 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8070')">直连复制</a></h3>
-              <p>星际探险，独特生态与高科技挑战。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb ragnarok"></div>
             <div class="card-info">
               <h3>『无有乡』017X - 纯净仙境 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:8110')">直连复制</a></h3>
-              <p>史诗级大陆，多样生态与探险点，适合团队与单人探险。</p>
             </div>
           </article>
           <article class="server-card">
-            <div class="thumb center"></div>
             <div class="card-info">
               <h3>『无有乡』007X - 纯净中心 - 公益仿官/模组物品勿入 711 <a href="#" class="copy-btn" onclick="copyToClipboard('open 183.155.32.240:7850')">直连复制</a></h3>
-              <p>火山与丛林交织，适合资源收集与团队合作。</p>
             </div>
           </article>
         </div>
@@ -594,51 +564,6 @@
       <div class="muted">页面由 无有乡 运营团队维护</div>
     </div>
   </footer>
-  <script>
-    // 主题切换与移动菜单
-    const themeBtn = document.getElementById('themeToggle');
-    const menuBtn = document.getElementById('menuToggle');
-    const root = document.documentElement;
-
-    function setTheme(dark) {
-      if (dark) {
-        root.classList.add('dark');
-        themeBtn.textContent = '☀️';
-        localStorage.setItem('site-dark', '1');
-      } else {
-        root.classList.remove('dark');
-        themeBtn.textContent = '🌙';
-        localStorage.removeItem('site-dark');
-      }
-    }
-
-    themeBtn.addEventListener('click', () => setTheme(!root.classList.contains('dark')));
-    if (localStorage.getItem('site-dark') === '1') setTheme(true);
-
-    menuBtn.addEventListener('click', () => {
-      document.body.classList.toggle('menu-open');
-    });
-
-    // 平滑滚动（支持旧浏览器简单降级）
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e){
-        const id = this.getAttribute('href');
-        if (id.length > 1) {
-          e.preventDefault();
-          document.querySelector(id).scrollIntoView({behavior: 'smooth'});
-          document.body.classList.remove('menu-open');
-        }
-      });
-    });
-
-    // 复制到剪贴板
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('已复制到剪贴板: ' + text);
-      }).catch(err => {
-        console.error('复制失败: ', err);
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
