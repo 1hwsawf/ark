@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.forEach(link => {
             if (link.getAttribute('href') === `#${activeId}`) {
                 link.classList.add('active');
-                // linear风格高亮
                 link.style.background = 'linear-gradient(90deg, #7c3aed26 0%, #06b6d426 100%)';
                 link.style.color = '#fff';
             } else {
@@ -78,10 +77,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 复制到剪贴板功能
     window.copyToClipboard = function(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert('已复制到剪贴板: ' + text);
-        }).catch(err => {
-            console.error('复制失败: ', err);
-        });
+        try {
+            navigator.clipboard.writeText(text).then(() => {
+                const notification = document.createElement('div');
+                notification.textContent = `已复制: ${text}`;
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.background = 'linear-gradient(90deg, #7c3aed 30%, #06b6d4 100%)';
+                notification.style.color = '#fff';
+                notification.style.padding = '10px 20px';
+                notification.style.borderRadius = '8px';
+                notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+                notification.style.zIndex = '1000';
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.remove();
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+                alert('复制失败，请手动复制: ' + text);
+            });
+        } catch (err) {
+            console.error('复制功能不可用: ', err);
+            alert('复制功能不可用，请手动复制: ' + text);
+        }
     };
 });
